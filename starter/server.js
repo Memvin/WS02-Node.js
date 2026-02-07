@@ -36,7 +36,6 @@ const server = http.createServer((req, res) => {
         }
         */
 
-
         // ========================================
         // TODO: Task 2 - Route Mapping
         // ========================================
@@ -44,17 +43,18 @@ const server = http.createServer((req, res) => {
         // Complete the if-else chain below:
         
         let filePath;
+
         if (req.url === '/') {
-            // Home page
             filePath = path.join(PUBLIC_DIR, 'index.html');
-        } 
-        // TODO: Add 'else if' for '/about' -> 'about.html'
-        // Example: else if (req.url === '/about') { filePath = path.join(PUBLIC_DIR, 'about.html'); }
-        
-        
-        // TODO: Add 'else if' for '/contact' -> 'contact.html'
-        
-        
+        } else if (req.url === '/about') {
+            filePath = path.join(PUBLIC_DIR, 'about.html');
+        } else if (req.url === '/contact') {
+            filePath = path.join(PUBLIC_DIR, 'contact.html');
+        } else {
+            handle404(res);
+            return;
+        }
+
         // ========================================
         // TODO: Task 4 - Serve CSS Files
         // ========================================
@@ -73,12 +73,9 @@ const server = http.createServer((req, res) => {
             }
         }
         */
-        else {
-            // No route matched -> 404
-            handle404(res);
-            return;
-        }
 
+        // NOTE: Do NOT add another "else" here while the CSS block above is commented.
+        // The 404 handling is already done in the routing chain above.
 
         // ========================================
         // TODO: Task 3 - Serve Files
@@ -176,4 +173,3 @@ server.listen(PORT, () => {
     // console.log('  GET /about         -> about.html');
     // console.log('  GET /contact       -> contact.html');
 });
-
