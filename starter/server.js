@@ -50,9 +50,6 @@ const server = http.createServer((req, res) => {
             filePath = path.join(PUBLIC_DIR, 'about.html');
         } else if (req.url === '/contact') {
             filePath = path.join(PUBLIC_DIR, 'contact.html');
-        } else {
-            handle404(res);
-            return;
         }
 
         // ========================================
@@ -61,7 +58,6 @@ const server = http.createServer((req, res) => {
         // Handle requests for CSS files from /styles/ folder
         // Uncomment and complete the security check:
         
-        /*
         else if (req.url.startsWith('/styles/')) {
             filePath = path.join(PUBLIC_DIR, req.url);
             
@@ -72,7 +68,11 @@ const server = http.createServer((req, res) => {
                 return;
             }
         }
-        */
+
+        else {
+            handle404(res);
+            return;
+        }
 
         // NOTE: Do NOT add another "else" here while the CSS block above is commented.
         // The 404 handling is already done in the routing chain above.
